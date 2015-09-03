@@ -32,9 +32,18 @@
 
         var response = $http.post('http://127.0.0.1:8080/rest/bet', request);
         response.success(function(data, status, headers, config) {
-            alert( "success message: " + JSON.stringify({data: data}));
-            //TODO: success message: {"data":{"status":0,"newCoefficient":3.3}}
-            //TODO: parse new coefficient and place bet again
+            console.log("got a bet response data = ");
+            console.log(data);
+
+            //check if bet was placed
+            if(data.status == 0){
+                //get new coefficient and display to user
+                if(confirm("The coefficient has changed to " + data.newCoefficient  + " would you still like to bet with the new coefficient?")){
+                    service.placeBet(sportsMatchName, betType, data.newCoefficient);
+                }
+            } else {
+                alert("Bet placed!");
+            }
         });
         response.error(function(data, status, headers, config) {
             alert( "failure message: " + JSON.stringify({data: data}));

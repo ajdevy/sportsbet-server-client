@@ -37,6 +37,7 @@ public class CoefficientDiffBettingService implements BettingService {
         final double serverCoefficient;
         try {
             serverCoefficient = getCoefficientFromSportsMatch(bet, sportsMatchEntity);
+            logger.info("serverCoefficient = " + serverCoefficient + " bet.getCoefficient() = " + bet.getCoefficient());
             if (bet.getCoefficient() == serverCoefficient) {
                 //save the bet
                 persistBet(new BetEntity(userIp, bet));
