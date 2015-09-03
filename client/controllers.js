@@ -7,6 +7,11 @@
                 $scope.matches=matches;
         });
 
+        $scope.populateDb = function() {
+                    console.log("populateDb");
+                    SportsMatchService.populateDb();
+        };
+
         $scope.placeWinBet = function(sportsMatch) {
                 console.log("placeWinBet on sportsMatch = ");
                 console.log(sportsMatch);

@@ -17,4 +17,6 @@ public interface SportsMatchRepository extends Repository<SportsMatchEntity, Str
     SportsMatchEntity save(SportsMatchEntity saved);
 
     SportsMatchEntity findByName(String sportsMatchName);
+
+    Long count();
 }

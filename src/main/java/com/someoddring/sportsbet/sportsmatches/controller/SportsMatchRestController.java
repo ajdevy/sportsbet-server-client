@@ -27,11 +27,12 @@ public class SportsMatchRestController {
     @RequestMapping(method = RequestMethod.GET, value = "/insertdata")
     @ResponseStatus(HttpStatus.CREATED)
     public void insert() {
-        logger.debug("starting to insert data...");
-        for (int i = 0; i < 5; i++) {
-            sportsMatchRepository.save(SportsMatchEntity.builder().random());
+        if (sportsMatchRepository.count() == 0) {
+            logger.debug("starting to insert data...");
+            for (int i = 0; i < 5; i++) {
+                sportsMatchRepository.save(SportsMatchEntity.builder().random());
+            }
+
         }
     }
-
-
 }

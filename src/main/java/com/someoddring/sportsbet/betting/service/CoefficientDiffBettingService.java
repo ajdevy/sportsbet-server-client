@@ -63,11 +63,11 @@ public class CoefficientDiffBettingService implements BettingService {
 
     private double getCoefficientFromSportsMatch(BetDTO bet, SportsMatchEntity sportsMatchEntity) throws SportsMatchDataCorrupctionException {
         switch (bet.getBetType()) {
-            case BetType.win:
+            case win:
                 return sportsMatchEntity.getWin();
-            case BetType.draw:
+            case draw:
                 return sportsMatchEntity.getDraw();
-            case BetType.lose:
+            case lose:
                 return sportsMatchEntity.getLose();
         }
         throw new SportsMatchDataCorrupctionException("No corresponding sports match type found, probably data is corrupted or the logic has changed");

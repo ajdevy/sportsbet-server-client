@@ -7,7 +7,7 @@ $ mvn clean spring-boot:run
 client/index.html
 
 # to populate the local the db with some dummy matches
- press "Populate db"
+press "Populate db"
 
 
 

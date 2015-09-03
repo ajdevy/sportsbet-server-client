@@ -13,7 +13,11 @@
     service.receive = function() {
       return listener.promise;
     };
-    
+
+    service.populateDb = function() {
+        $http.get('http://127.0.0.1:8080/rest/insertdata');
+    }
+
     service.placeBet = function(sportsMatchName, betType, coefficient) {
         //placebet to REST
         var request = {
