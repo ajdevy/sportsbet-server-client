@@ -26,7 +26,7 @@ public class BettingRestController {
         this.bettingService = bettingService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/bet", consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, value = "/bet")
     @ResponseBody
     public BetResponseDTO placeBet(@RequestBody BetDTO bet, HttpServletRequest request) {
         logger.info("placing a bet... " + bet);

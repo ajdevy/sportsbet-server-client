@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories
-class MongoDbConfig extends AbstractMongoConfiguration {
+public class MongoDbConfig extends AbstractMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {

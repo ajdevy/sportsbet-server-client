@@ -6,6 +6,7 @@ import com.someoddring.sportsbet.betting.integration.BetDTO;
 import java.math.BigDecimal;
 
 public class BetEntity {
+    private String id;
     private long timestamp;
     private String ip;
     private String sportsMatchName;
@@ -71,5 +72,58 @@ public class BetEntity {
 
     public void setBetAmount(BigDecimal betAmount) {
         this.betAmount = betAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "BetEntity{" +
+                "id='" + id + '\'' +
+                ", timestamp=" + timestamp +
+                ", ip='" + ip + '\'' +
+                ", sportsMatchName='" + sportsMatchName + '\'' +
+                ", betType=" + betType +
+                ", coefficient=" + coefficient +
+                ", betAmount=" + betAmount +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BetEntity betEntity = (BetEntity) o;
+
+        if (Double.compare(betEntity.coefficient, coefficient) != 0) return false;
+        if (timestamp != betEntity.timestamp) return false;
+        if (betAmount != null ? !betAmount.equals(betEntity.betAmount) : betEntity.betAmount != null) return false;
+        if (betType != betEntity.betType) return false;
+        if (ip != null ? !ip.equals(betEntity.ip) : betEntity.ip != null) return false;
+        if (sportsMatchName != null ? !sportsMatchName.equals(betEntity.sportsMatchName) : betEntity.sportsMatchName != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = (int) (timestamp ^ (timestamp >>> 32));
+        result = 31 * result + (ip != null ? ip.hashCode() : 0);
+        result = 31 * result + (sportsMatchName != null ? sportsMatchName.hashCode() : 0);
+        result = 31 * result + (betType != null ? betType.hashCode() : 0);
+        temp = Double.doubleToLongBits(coefficient);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (betAmount != null ? betAmount.hashCode() : 0);
+        return result;
     }
 }

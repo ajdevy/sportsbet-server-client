@@ -85,8 +85,9 @@ public class SportsMatchEntity {
     }
 
     public static class Builder extends SportsMatchEntity {
+        public static final String SPORTS_MATCH_GERMANY_ITALY = "Germany - Italy";
         private LinkedList<String> matchNames = new LinkedList<>(Arrays.asList(new String[]{"Russia - France",
-                "Germany - Italy", "Afghanistan - Thailand",
+                SPORTS_MATCH_GERMANY_ITALY, "Afghanistan - Thailand",
                 "Malta - Latvia", "Lithuania - Estonia"}));
 
         private Builder() {

@@ -53,7 +53,7 @@ public class ScheduledRandomCoefficientGenerator {
     }
 
     private long atLeastOnceASecond() {
-        return rand.nextInt(500) + 500;
+        return rand.nextInt(700) + 300;
     }
 
 }

@@ -2,6 +2,7 @@ package com.someoddring.sportsbet.betting.integration;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.someoddring.sportsbet.betting.BetType;
+import com.someoddring.sportsbet.betting.dao.entity.BetEntity;
 
 import java.math.BigDecimal;
 
@@ -12,8 +13,21 @@ public class BetDTO {
     private BigDecimal betAmount;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BetType betType;
-
+    private String ip;
+    private long timestamp;
     private double coefficient;
+
+    public BetDTO() {
+    }
+
+    public BetDTO(BetEntity bet) {
+        this.sportsMatchName = bet.getSportsMatchName();
+        this.betAmount = bet.getBetAmount();
+        this.betType = bet.getBetType();
+        this.coefficient = bet.getCoefficient();
+        this.timestamp = bet.getTimestamp();
+        this.ip = bet.getIp();
+    }
 
     public String getSportsMatchName() {
         return sportsMatchName;
@@ -47,12 +61,30 @@ public class BetDTO {
         this.coefficient = coefficient;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return "BetDTO{" +
                 "sportsMatchName='" + sportsMatchName + '\'' +
                 ", betAmount=" + betAmount +
-                ", betType='" + betType + '\'' +
+                ", betType=" + betType +
+                ", ip='" + ip + '\'' +
+                ", timestamp=" + timestamp +
                 ", coefficient=" + coefficient +
                 '}';
     }

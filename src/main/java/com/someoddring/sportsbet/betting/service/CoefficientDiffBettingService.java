@@ -4,10 +4,10 @@ import com.someoddring.sportsbet.betting.dao.BetRepository;
 import com.someoddring.sportsbet.betting.dao.entity.BetEntity;
 import com.someoddring.sportsbet.betting.integration.BetDTO;
 import com.someoddring.sportsbet.betting.integration.BetResponseDTO;
+import com.someoddring.sportsbet.integration.StatusResponseDTO;
 import com.someoddring.sportsbet.sportsmatches.dao.SportsMatchRepository;
 import com.someoddring.sportsbet.sportsmatches.dao.entity.SportsMatchEntity;
 import com.someoddring.sportsbet.sportsmatches.dao.exception.SportsMatchDataCorrupctionException;
-import com.someoddring.sportsbet.betting.BetType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +42,17 @@ public class CoefficientDiffBettingService implements BettingService {
                 //save the bet
                 persistBet(new BetEntity(userIp, bet));
 
-                response = new BetResponseDTO(BetResponseDTO.SUCCESS);
+                response = new BetResponseDTO(StatusResponseDTO.SUCCESS);
                 logger.info("bet placed successfully");
             } else {
-                response = new BetResponseDTO(BetResponseDTO.FAILURE, serverCoefficient);
+                response = new BetResponseDTO(StatusResponseDTO.FAILURE, serverCoefficient);
             }
         } catch (SportsMatchDataCorrupctionException e) {
             logger.error("data corruption detected", e);
-            response = new BetResponseDTO(BetResponseDTO.FAILURE);
+            response = new BetResponseDTO(StatusResponseDTO.FAILURE);
         } catch (DataAccessException e) {
             logger.error("exception occured while persisting a bet", e);
-            response = new BetResponseDTO(BetResponseDTO.FAILURE);
+            response = new BetResponseDTO(StatusResponseDTO.FAILURE);
         }
 
         return response;
