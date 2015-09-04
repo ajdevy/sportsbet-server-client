@@ -29,8 +29,9 @@ public class SportsMatchRestController {
     public void insert() {
         if (sportsMatchRepository.count() == 0) {
             logger.debug("starting to insert data...");
+            SportsMatchEntity.Builder builder = SportsMatchEntity.builder();
             for (int i = 0; i < 5; i++) {
-                sportsMatchRepository.save(SportsMatchEntity.builder().random());
+                sportsMatchRepository.save(builder.random());
             }
 
         }

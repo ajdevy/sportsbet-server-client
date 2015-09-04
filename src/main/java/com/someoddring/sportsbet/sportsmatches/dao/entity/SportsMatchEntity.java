@@ -3,8 +3,9 @@ package com.someoddring.sportsbet.sportsmatches.dao.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
-import java.util.UUID;
 
 public class SportsMatchEntity {
     private String id;
@@ -84,6 +85,9 @@ public class SportsMatchEntity {
     }
 
     public static class Builder extends SportsMatchEntity {
+        private LinkedList<String> matchNames = new LinkedList<>(Arrays.asList(new String[]{"Russia - France",
+                "Germany - Italy", "Afghanistan - Thailand",
+                "Malta - Latvia", "Lithuania - Estonia"}));
 
         private Builder() {
         }
@@ -118,15 +122,16 @@ public class SportsMatchEntity {
         }
 
         public SportsMatchEntity random() {
-
-            return SportsMatchEntity
-                    .builder()
-                    .name(UUID.randomUUID().toString().substring(0, 10))
+            return name(matchNames.pop())//UUID.randomUUID().toString().substring(0, 10))
                     .type("1x2")
                     .win(randomCoefficient())
                     .lose(randomCoefficient())
                     .draw(randomCoefficient())
                     .build();
+        }
+
+        private String randomSportsMatchName() {
+            return null;
         }
 
         public static double randomCoefficient() {

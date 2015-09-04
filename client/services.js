@@ -18,35 +18,34 @@
         $http.get('http://127.0.0.1:8080/rest/insertdata');
     }
 
-    service.placeBet = function(sportsMatchName, betType, coefficient) {
-        //placebet to REST
+    service.placeBet = function(bet) {
+        //place bet to REST
         var request = {
-                sportsMatchName : sportsMatchName,
-                betAmount : 20,
-                betType : betType,
-                coefficient : coefficient,
+                sportsMatchName : bet.sportsMatchName,
+                betAmount : bet.amount,
+                betType : bet.betType,
+                coefficient : bet.coefficient,
         };
-
-        console.log("placing bet to server... ");
-        console.log(request)
+        console.log("placing bet to REST, request = ");
+        console.log(request);
 
         var response = $http.post('http://127.0.0.1:8080/rest/bet', request);
         response.success(function(data, status, headers, config) {
-            console.log("got a bet response data = ");
             console.log(data);
 
             //check if bet was placed
             if(data.status == 0){
                 //get new coefficient and display to user
                 if(confirm("The coefficient has changed to " + data.newCoefficient  + " would you still like to bet with the new coefficient?")){
-                    service.placeBet(sportsMatchName, betType, data.newCoefficient);
+                    bet.coefficient=data.newCoefficient;
+                    service.placeBet(bet);
                 }
             } else {
                 alert("Bet placed!");
             }
         });
         response.error(function(data, status, headers, config) {
-            alert( "failure message: " + JSON.stringify({data: data}));
+            alert("Could not place a bet: " + JSON.stringify({data: data}));
         });
     };
 

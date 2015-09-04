@@ -10,7 +10,6 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -21,20 +20,18 @@ public class ScheduledRandomCoefficientGenerator {
     private SportsMatchRepository sportsMatchRepository;
 
     private TaskScheduler scheduler = new ConcurrentTaskScheduler();
-    private List<SportsMatchEntity> sportsMatches = Collections.emptyList();
     private Random rand = new Random(System.currentTimeMillis());
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private void getLatestSportsMatchesAndBroadcast() {
-        if (sportsMatches.isEmpty()) {
-            sportsMatches = sportsMatchRepository.findAll();
-        }
+        final List<SportsMatchEntity> sportsMatches = sportsMatchRepository.findAll();
 
         for (SportsMatchEntity sportsMatch : sportsMatches) {
             sportsMatch.setWin(SportsMatchEntity.Builder.randomCoefficient());
             sportsMatch.setDraw(SportsMatchEntity.Builder.randomCoefficient());
             sportsMatch.setLose(SportsMatchEntity.Builder.randomCoefficient());
+//            logger.info("saving sportsmatch " + sportsMatch);
             sportsMatchRepository.save(sportsMatch);
         }
     }

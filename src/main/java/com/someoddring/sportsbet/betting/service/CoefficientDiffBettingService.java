@@ -31,7 +31,7 @@ public class CoefficientDiffBettingService implements BettingService {
     @Override
     public BetResponseDTO placeBet(String userIp, BetDTO bet) {
         final SportsMatchEntity sportsMatchEntity = sportsMatchRepository.findByName(bet.getSportsMatchName());
-        logger.info("placing bet... found a sports match for the bet " + sportsMatchEntity);
+        logger.info("placing bet... found a sports match for the bet " + sportsMatchEntity +" the bet = " + bet);
 
         BetResponseDTO response;
         final double serverCoefficient;
