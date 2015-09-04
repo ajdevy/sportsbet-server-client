@@ -28,9 +28,15 @@ public class ScheduledRandomCoefficientGenerator {
         final List<SportsMatchEntity> sportsMatches = sportsMatchRepository.findAll();
 
         for (SportsMatchEntity sportsMatch : sportsMatches) {
-            sportsMatch.setWin(SportsMatchEntity.Builder.randomCoefficient());
-            sportsMatch.setDraw(SportsMatchEntity.Builder.randomCoefficient());
-            sportsMatch.setLose(SportsMatchEntity.Builder.randomCoefficient());
+            Random random = new Random(System.currentTimeMillis());
+            if (random.nextBoolean())
+                sportsMatch.setWin(SportsMatchEntity.Builder.randomCoefficient());
+
+            if (random.nextBoolean())
+                sportsMatch.setDraw(SportsMatchEntity.Builder.randomCoefficient());
+
+            if (random.nextBoolean())
+                sportsMatch.setLose(SportsMatchEntity.Builder.randomCoefficient());
 //            logger.info("saving sportsmatch " + sportsMatch);
             sportsMatchRepository.save(sportsMatch);
         }

@@ -135,7 +135,7 @@ public class SportsMatchEntity {
         }
 
         public static double randomCoefficient() {
-            return Math.abs((new Random().nextInt(5 * 10 + 1) - 10) / 10.0);
+            return Math.abs((new Random().nextInt(4 * 10 + 1) - 10) / 10.0) + 1.0d;
         }
     }
 }
