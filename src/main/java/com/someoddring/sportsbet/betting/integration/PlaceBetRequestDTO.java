@@ -66,10 +66,8 @@ public class PlaceBetRequestDTO {
         if (Double.compare(betDTO.coefficient, coefficient) != 0) return false;
         if (betAmount != null ? !betAmount.equals(betDTO.betAmount) : betDTO.betAmount != null) return false;
         if (betType != betDTO.betType) return false;
-        if (sportsMatchName != null ? !sportsMatchName.equals(betDTO.sportsMatchName) : betDTO.sportsMatchName != null)
-            return false;
+        return !(sportsMatchName != null ? !sportsMatchName.equals(betDTO.sportsMatchName) : betDTO.sportsMatchName != null);
 
-        return true;
     }
 
     @Override

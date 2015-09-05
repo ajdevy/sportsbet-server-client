@@ -7,10 +7,8 @@ import com.someoddring.sportsbet.reports.integration.DeleteRequestDTO;
 import com.someoddring.sportsbet.reports.service.ReportsService;
 import com.someoddring.sportsbet.test.BaseRestControllerTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

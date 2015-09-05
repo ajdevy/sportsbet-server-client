@@ -37,9 +37,7 @@ public class MongoDbConfig extends AbstractMongoConfiguration {
                         new MongoMappingContext());
         converter.setTypeMapper(new DefaultMongoTypeMapper(null));
 
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), converter);
-
-        return mongoTemplate;
+        return new MongoTemplate(mongoDbFactory(), converter);
 
     }
 }

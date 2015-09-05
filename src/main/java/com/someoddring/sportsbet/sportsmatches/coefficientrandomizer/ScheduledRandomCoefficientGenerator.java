@@ -16,12 +16,10 @@ import java.util.Random;
 @Component
 public class ScheduledRandomCoefficientGenerator {
 
+    private final TaskScheduler scheduler = new ConcurrentTaskScheduler();
+    private final Random rand = new Random(System.currentTimeMillis());
     @Autowired
     private SportsMatchRepository sportsMatchRepository;
-
-    private TaskScheduler scheduler = new ConcurrentTaskScheduler();
-    private Random rand = new Random(System.currentTimeMillis());
-
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private void getLatestSportsMatchesAndBroadcast() {

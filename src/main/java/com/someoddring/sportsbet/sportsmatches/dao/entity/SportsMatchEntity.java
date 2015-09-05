@@ -8,14 +8,13 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class SportsMatchEntity {
+    private static final Logger logger = LoggerFactory.getLogger(SportsMatchEntity.class);
     private String id;
     private String name;
     private String type;
     private double win;
     private double draw;
     private double lose;
-
-    private static final Logger logger = LoggerFactory.getLogger(SportsMatchEntity.class);
 
     public SportsMatchEntity() {
     }
@@ -26,6 +25,10 @@ public class SportsMatchEntity {
         this.win = win;
         this.draw = draw;
         this.lose = lose;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String getType() {
@@ -95,9 +98,8 @@ public class SportsMatchEntity {
 
         SportsMatchEntity that = (SportsMatchEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        return !(id != null ? !id.equals(that.id) : that.id != null);
 
-        return true;
     }
 
     @Override
@@ -105,17 +107,17 @@ public class SportsMatchEntity {
         return id != null ? id.hashCode() : 0;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder extends SportsMatchEntity {
         public static final String SPORTS_MATCH_GERMANY_ITALY = "Germany - Italy";
-        private LinkedList<String> matchNames = new LinkedList<>(Arrays.asList(new String[]{"Russia - France",
+        private final LinkedList<String> matchNames = new LinkedList<>(Arrays.asList("Russia - France",
                 SPORTS_MATCH_GERMANY_ITALY, "Afghanistan - Thailand",
-                "Malta - Latvia", "Lithuania - Estonia"}));
+                "Malta - Latvia", "Lithuania - Estonia"));
 
         private Builder() {
+        }
+
+        public static double randomCoefficient() {
+            return Math.abs((new Random().nextInt(4 * 10 + 1) - 10) / 10.0) + 1.0d;
         }
 
         public Builder name(String name) {
@@ -148,7 +150,7 @@ public class SportsMatchEntity {
         }
 
         public SportsMatchEntity random() {
-            return name(matchNames.pop())//UUID.randomUUID().toString().substring(0, 10))
+            return name(matchNames.pop())
                     .type("1x2")
                     .win(randomCoefficient())
                     .lose(randomCoefficient())
@@ -157,11 +159,10 @@ public class SportsMatchEntity {
         }
 
         private String randomSportsMatchName() {
-            return null;
-        }
-
-        public static double randomCoefficient() {
-            return Math.abs((new Random().nextInt(4 * 10 + 1) - 10) / 10.0) + 1.0d;
+            return matchNames.get(
+                    new Random(System.currentTimeMillis())
+                            .nextInt(matchNames.size())
+            );
         }
     }
 }

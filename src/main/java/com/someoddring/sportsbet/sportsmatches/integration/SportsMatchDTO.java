@@ -71,9 +71,8 @@ public class SportsMatchDTO {
         if (Double.compare(that.lose, lose) != 0) return false;
         if (Double.compare(that.win, win) != 0) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        return !(type != null ? !type.equals(that.type) : that.type != null);
 
-        return true;
     }
 
     @Override

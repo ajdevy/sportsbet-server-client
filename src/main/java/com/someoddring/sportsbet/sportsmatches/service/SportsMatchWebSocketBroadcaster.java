@@ -21,17 +21,16 @@ public class SportsMatchWebSocketBroadcaster {
 
     private final LiveBroadcastChannel liveBroadcastChannel;
 
-    private TaskScheduler scheduler = new ConcurrentTaskScheduler();
+    private final TaskScheduler scheduler = new ConcurrentTaskScheduler();
     private List<String> stockPrices = new ArrayList<>();
     private Random rand = new Random(System.currentTimeMillis());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public SportsMatchWebSocketBroadcaster(SportsMatchService sportsMatchService, LiveBroadcastChannel liveBroadcastChannel) {
         this.sportsMatchService = sportsMatchService;
         this.liveBroadcastChannel = liveBroadcastChannel;
     }
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private void getLatestSportsMatchesAndBroadcast() {
         liveBroadcastChannel.send(sportsMatchService.findAll());

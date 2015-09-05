@@ -1,7 +1,6 @@
 package com.someoddring.sportsbet.betting.integration;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.someoddring.sportsbet.betting.BetType;
 import com.someoddring.sportsbet.betting.dao.entity.BetEntity;
 
@@ -89,10 +88,8 @@ public class BetDTO {
         if (betAmount != null ? !betAmount.equals(betDTO.betAmount) : betDTO.betAmount != null) return false;
         if (betType != betDTO.betType) return false;
         if (ip != null ? !ip.equals(betDTO.ip) : betDTO.ip != null) return false;
-        if (sportsMatchName != null ? !sportsMatchName.equals(betDTO.sportsMatchName) : betDTO.sportsMatchName != null)
-            return false;
+        return !(sportsMatchName != null ? !sportsMatchName.equals(betDTO.sportsMatchName) : betDTO.sportsMatchName != null);
 
-        return true;
     }
 
     @Override

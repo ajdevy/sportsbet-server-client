@@ -7,7 +7,7 @@ import com.someoddring.sportsbet.betting.integration.PlaceBetResponseDTO;
 import com.someoddring.sportsbet.integration.StatusResponseDTO;
 import com.someoddring.sportsbet.sportsmatches.dao.SportsMatchRepository;
 import com.someoddring.sportsbet.sportsmatches.dao.entity.SportsMatchEntity;
-import com.someoddring.sportsbet.sportsmatches.dao.exception.SportsMatchDataCorrupctionException;
+import com.someoddring.sportsbet.sportsmatches.dao.exception.SportsMatchDataCorruptionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +47,11 @@ public class CoefficientDiffBettingService implements BettingService {
             } else {
                 response = new PlaceBetResponseDTO(StatusResponseDTO.FAILURE, serverCoefficient);
             }
-        } catch (SportsMatchDataCorrupctionException e) {
+        } catch (SportsMatchDataCorruptionException e) {
             logger.error("data corruption detected", e);
             response = new PlaceBetResponseDTO(StatusResponseDTO.FAILURE);
         } catch (DataAccessException e) {
-            logger.error("exception occured while persisting a bet", e);
+            logger.error("exception occurred while persisting a bet", e);
             response = new PlaceBetResponseDTO(StatusResponseDTO.FAILURE);
         }
 
@@ -62,7 +62,7 @@ public class CoefficientDiffBettingService implements BettingService {
         betRepository.save(betEntity);
     }
 
-    private double getCoefficientFromSportsMatch(PlaceBetRequestDTO bet, SportsMatchEntity sportsMatchEntity) throws SportsMatchDataCorrupctionException {
+    private double getCoefficientFromSportsMatch(PlaceBetRequestDTO bet, SportsMatchEntity sportsMatchEntity) throws SportsMatchDataCorruptionException {
         switch (bet.getBetType()) {
             case win:
                 return sportsMatchEntity.getWin();
@@ -71,6 +71,6 @@ public class CoefficientDiffBettingService implements BettingService {
             case lose:
                 return sportsMatchEntity.getLose();
         }
-        throw new SportsMatchDataCorrupctionException("No corresponding sports match type found, probably data is corrupted or the logic has changed");
+        throw new SportsMatchDataCorruptionException("No corresponding sports match type found, probably data is corrupted or the logic has changed");
     }
 }

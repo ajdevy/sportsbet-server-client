@@ -6,6 +6,7 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 
+@SuppressWarnings("UnusedReturnValue")
 public interface SportsMatchRepository extends Repository<SportsMatchEntity, String> {
 
     void delete(SportsMatchEntity deleted);

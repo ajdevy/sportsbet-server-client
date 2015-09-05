@@ -118,10 +118,8 @@ public class BetEntity {
         if (betAmount != null ? !betAmount.equals(betEntity.betAmount) : betEntity.betAmount != null) return false;
         if (betType != betEntity.betType) return false;
         if (ip != null ? !ip.equals(betEntity.ip) : betEntity.ip != null) return false;
-        if (sportsMatchName != null ? !sportsMatchName.equals(betEntity.sportsMatchName) : betEntity.sportsMatchName != null)
-            return false;
+        return !(sportsMatchName != null ? !sportsMatchName.equals(betEntity.sportsMatchName) : betEntity.sportsMatchName != null);
 
-        return true;
     }
 
     @Override

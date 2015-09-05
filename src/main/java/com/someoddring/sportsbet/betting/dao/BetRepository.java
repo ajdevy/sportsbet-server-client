@@ -6,11 +6,12 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 
+@SuppressWarnings({"EmptyMethod", "UnusedReturnValue"})
 public interface BetRepository {
 
     List<BetEntity> findAll();
 
-    BetEntity save(BetEntity saved) throws DataAccessException;
+    void save(BetEntity saved) throws DataAccessException;
 
     Long countBetsForIp(String ip);
 
@@ -18,7 +19,7 @@ public interface BetRepository {
 
     List<BetEntity> findWinBetsOnGermanyItaly();
 
-    BetEntity delete(BetEntity betEntity);
+    void delete(BetEntity betEntity);
 
     void deleteAll();
 }

@@ -27,9 +27,9 @@ import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class BetingServiceTest {
+public class BettingServiceTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(BetingServiceTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(BettingServiceTest.class);
 
 
     @Mock
@@ -59,7 +59,7 @@ public class BetingServiceTest {
     }
 
     @Test
-    public void testPlaceBetSucess() {
+    public void testPlaceBetSuccess() {
         PlaceBetRequestDTO placeBetRequest = new PlaceBetRequestDTO();
         placeBetRequest.setBetAmount(new BigDecimal(20));
         placeBetRequest.setBetType(BetType.win);
@@ -114,7 +114,6 @@ public class BetingServiceTest {
 
         final PlaceBetResponseDTO response = bettingService.placeBet(testIp, placeBetRequest);
 
-        final ArgumentCaptor<BetEntity> savedBetArgumentCaptor = ArgumentCaptor.forClass(BetEntity.class);
         verifyNoMoreInteractions(betRepository);
 
         assertThat(response)
