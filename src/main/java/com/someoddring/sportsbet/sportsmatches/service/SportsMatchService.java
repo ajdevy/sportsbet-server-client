@@ -10,20 +10,15 @@ public abstract class SportsMatchService {
 
     public abstract List<SportsMatchDTO> findAll();
 
-    public List<SportsMatchDTO> convertToDTOs(List<SportsMatchEntity> models) {
+    protected List<SportsMatchDTO> convertToDTOs(List<SportsMatchEntity> models) {
         List<SportsMatchDTO> sportsMatchDtoList = new ArrayList<>();
         if (models != null) {
             for (SportsMatchEntity sportsMatch : models) {
 
-                sportsMatchDtoList.add(convertToDTO(sportsMatch));
+                sportsMatchDtoList.add(new SportsMatchDTO(sportsMatch));
             }
         }
         return sportsMatchDtoList;
     }
 
-    public SportsMatchDTO convertToDTO(SportsMatchEntity model) {
-        SportsMatchDTO dto = new SportsMatchDTO(model);
-
-        return dto;
-    }
 }

@@ -63,7 +63,7 @@ public class SportsMatchServiceTest {
                 .isNotNull()
                 .hasSize(1);
         assertThat(sportsMatches.get(0))
-                .isEqualTo(service.convertToDTO(sportsMatchEntity));
+                .isEqualTo(new SportsMatchDTO(sportsMatchEntity));
     }
 
 
