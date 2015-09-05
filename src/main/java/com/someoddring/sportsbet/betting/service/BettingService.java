@@ -1,10 +1,8 @@
 package com.someoddring.sportsbet.betting.service;
 
-import com.someoddring.sportsbet.betting.integration.BetDTO;
-import com.someoddring.sportsbet.betting.integration.BetResponseDTO;
-
+import com.someoddring.sportsbet.betting.integration.PlaceBetRequestDTO;
+import com.someoddring.sportsbet.betting.integration.PlaceBetResponseDTO;
 
 public interface BettingService {
-
-    BetResponseDTO placeBet(String userIp,BetDTO bet);
+    PlaceBetResponseDTO placeBet(String userIp, PlaceBetRequestDTO bet);
 }

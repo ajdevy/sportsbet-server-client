@@ -16,14 +16,16 @@ import java.util.List;
 public class ReportsServiceImpl implements ReportsService {
 
     private final BetRepository betRepository;
+    private final InetAddressValidator validator;
 
     @Autowired
     public ReportsServiceImpl(BetRepository betRepository) {
         this.betRepository = betRepository;
+        this.validator = InetAddressValidator.getInstance();
     }
 
     public CountBetsForIpResponseDTO countBetsForIp(String ip) {
-        InetAddressValidator validator = InetAddressValidator.getInstance();
+
         final CountBetsForIpResponseDTO response = new CountBetsForIpResponseDTO();
         if (validator.isValid(ip)) {
             final long betCount = betRepository.countBetsForIp(ip);
@@ -38,13 +40,13 @@ public class ReportsServiceImpl implements ReportsService {
     }
 
     public DeleteResponseDTO deleteByTimestamp(long timestamp) {
-        betRepository.deleteByTimestamp(timestamp);
-        return new DeleteResponseDTO(DeleteResponseDTO.SUCCESS);
+        final Long recordsDeleted = betRepository.deleteByTimestamp(timestamp);
+        return recordsDeleted > 0 ? new DeleteResponseDTO(DeleteResponseDTO.SUCCESS) : new DeleteResponseDTO(DeleteResponseDTO.FAILURE);
     }
 
     public List<BetDTO> findWinBetsOnGermanyItaly() {
-        List<BetEntity> bets = betRepository.findWinBetsOnGermanyItaly();
-        List<BetDTO> response = new ArrayList<>();
+        final List<BetEntity> bets = betRepository.findWinBetsOnGermanyItaly();
+        final List<BetDTO> response = new ArrayList<>();
         for (BetEntity bet : bets) {
             response.add(new BetDTO(bet));
         }

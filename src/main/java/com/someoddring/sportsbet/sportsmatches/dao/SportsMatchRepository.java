@@ -12,11 +12,11 @@ public interface SportsMatchRepository extends Repository<SportsMatchEntity, Str
 
     List<SportsMatchEntity> findAll();
 
-    SportsMatchEntity findOne(String id);
-
     SportsMatchEntity save(SportsMatchEntity saved);
 
     SportsMatchEntity findByName(String sportsMatchName);
 
     Long count();
+
+    void deleteAll();
 }

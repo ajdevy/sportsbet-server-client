@@ -1,9 +1,9 @@
 package com.someoddring.sportsbet.sportsmatches.service;
 
+import com.someoddring.sportsbet.sportsmatches.broadcast.LiveBroadcastChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.stereotype.Component;
@@ -17,23 +17,28 @@ import java.util.Random;
 public class SportsMatchWebSocketBroadcaster {
     final static int BROADCAST_DELAY = 500;
 
-    @Autowired
-    private SimpMessagingTemplate template;
-    @Autowired
-    private SportsMatchService sportsMatchService;
+    private final SportsMatchService sportsMatchService;
+
+    private final LiveBroadcastChannel liveBroadcastChannel;
 
     private TaskScheduler scheduler = new ConcurrentTaskScheduler();
     private List<String> stockPrices = new ArrayList<>();
     private Random rand = new Random(System.currentTimeMillis());
 
+    @Autowired
+    public SportsMatchWebSocketBroadcaster(SportsMatchService sportsMatchService, LiveBroadcastChannel liveBroadcastChannel) {
+        this.sportsMatchService = sportsMatchService;
+        this.liveBroadcastChannel = liveBroadcastChannel;
+    }
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private void getLatestSportsMatchesAndBroadcast() {
-        template.convertAndSend("/topic/bids", sportsMatchService.findAll());
+        liveBroadcastChannel.send(sportsMatchService.findAll());
     }
 
     @PostConstruct
-    private void broadcastTimePeriodically() {
+    public void broadcastTimePeriodically() {
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

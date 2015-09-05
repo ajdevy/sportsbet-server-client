@@ -3,19 +3,19 @@ package com.someoddring.sportsbet.betting.integration;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.someoddring.sportsbet.integration.StatusResponseDTO;
 
-public class BetResponseDTO extends StatusResponseDTO {
+public class PlaceBetResponseDTO extends StatusResponseDTO {
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private double newCoefficient;
 
-    public BetResponseDTO() {
+    public PlaceBetResponseDTO() {
         super();
     }
 
-    public BetResponseDTO(int status) {
+    public PlaceBetResponseDTO(int status) {
        super(status);
     }
 
-    public BetResponseDTO(int status, double newCoefficient) {
+    public PlaceBetResponseDTO(int status, double newCoefficient) {
         super(status);
         this.newCoefficient = newCoefficient;
     }

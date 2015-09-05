@@ -2,6 +2,7 @@ package com.someoddring.sportsbet.betting.dao.entity;
 
 import com.someoddring.sportsbet.betting.BetType;
 import com.someoddring.sportsbet.betting.integration.BetDTO;
+import com.someoddring.sportsbet.betting.integration.PlaceBetRequestDTO;
 
 import java.math.BigDecimal;
 
@@ -17,7 +18,16 @@ public class BetEntity {
     public BetEntity() {
     }
 
-    public BetEntity(String userIp, BetDTO bet) {
+    public BetEntity(BetDTO bet) {
+        this.ip = bet.getIp();
+        this.timestamp = bet.getTimestamp();
+        this.sportsMatchName = bet.getSportsMatchName();
+        this.betType = bet.getBetType();
+        this.coefficient = bet.getCoefficient();
+        this.betAmount = bet.getBetAmount();
+    }
+
+    public BetEntity(String userIp, PlaceBetRequestDTO bet) {
         this.ip = userIp;
         this.timestamp = System.currentTimeMillis();
         this.sportsMatchName = bet.getSportsMatchName();
@@ -25,6 +35,7 @@ public class BetEntity {
         this.coefficient = bet.getCoefficient();
         this.betAmount = bet.getBetAmount();
     }
+
 
     public long getTimestamp() {
         return timestamp;

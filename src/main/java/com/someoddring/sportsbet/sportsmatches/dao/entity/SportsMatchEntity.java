@@ -68,6 +68,14 @@ public class SportsMatchEntity {
         this.win = win;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "SportsMatchEntity{" +
@@ -78,6 +86,23 @@ public class SportsMatchEntity {
                 ", draw=" + draw +
                 ", lose=" + lose +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SportsMatchEntity that = (SportsMatchEntity) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     public static Builder builder() {
