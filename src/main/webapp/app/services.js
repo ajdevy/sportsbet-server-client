@@ -7,7 +7,7 @@
     }, sportsMatchIds = [];
 
     service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "http://127.0.0.1:8080/live";
+    service.SOCKET_URL = "/live";
     service.CHAT_TOPIC = "/topic/bids";
 
     service.receive = function() {
@@ -15,7 +15,7 @@
     };
 
     service.populateDb = function() {
-        $http.get('http://127.0.0.1:8080/rest/insertdata');
+        $http.get('/rest/insertdata');
     }
 
     service.placeBet = function(bet) {
@@ -29,7 +29,7 @@
         console.log("placing bet to REST, request = ");
         console.log(request);
 
-        var response = $http.post('http://127.0.0.1:8080/rest/bet', request);
+        var response = $http.post('/rest/bet', request);
         response.success(function(data, status, headers, config) {
             console.log(data);
 
